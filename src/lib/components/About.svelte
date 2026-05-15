@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ChevronDown, Sparkles } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { ABOUT_TIMELINE, DAILY_STACK, SKILLS, SITE } from '$lib/portfolio/config';
@@ -92,7 +93,7 @@
 			class="font-body mb-12 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm"
 			style="border-color: var(--border-subtle); color: var(--text-muted)"
 		>
-			<span class="text-accent-grass" aria-hidden="true">↓</span>
+			<ChevronDown size={16} class="text-[var(--accent-grass)]" />
 			Keep scrolling to drive the timeline
 		</p>
 	</div>
@@ -171,7 +172,7 @@
 					style="border-color: var(--accent-grass); background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--accent-honey) 35%, transparent), transparent 55%)"
 					aria-hidden="true"
 				>
-					✦
+					<Sparkles size={36} class="text-[var(--accent-honey)]" strokeWidth={1.75} />
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ArrowRight, X } from '@lucide/svelte';
 	import { tick } from 'svelte';
 	import { browser } from '$app/environment';
 	import { PROJECTS, type Project, type ProjectCategory } from '$lib/portfolio/config';
@@ -152,10 +153,11 @@
 						</h3>
 						<p class="font-body mt-2 text-sm leading-relaxed" style="color: var(--text-muted)">{p.blurb}</p>
 						<p
-							class="font-heading mt-4 text-xs font-semibold tracking-wide uppercase"
+							class="font-heading mt-4 inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase"
 							style="color: var(--accent-grass)"
 						>
-							Open case study →
+							Open case study
+							<ArrowRight size={14} />
 						</p>
 					</div>
 				</button>
@@ -186,12 +188,12 @@
 		>
 			<button
 				type="button"
-				class="font-body absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border text-xl leading-none transition hover:scale-110"
+				class="font-body absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border transition hover:scale-110"
 				style="border-color: var(--border-subtle); color: var(--text-muted); background: var(--bg-card)"
 				onclick={closeModal}
 				aria-label="Close"
 			>
-				×
+				<X size={20} />
 			</button>
 			<img src={modal.image} alt="" class="mb-4 max-h-52 w-full rounded-xl object-cover shadow-lg" />
 			<p class="font-heading text-accent-honey text-xs font-semibold uppercase">{modal.category}</p>

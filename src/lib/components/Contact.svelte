@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { CircleCheck } from '@lucide/svelte';
 	import emailjs from '@emailjs/browser';
 	import { confetti } from '@neoconfetti/svelte';
 	import { env } from '$env/dynamic/public';
@@ -66,7 +67,10 @@
 				class="interactive-card animate-card-in rounded-2xl border px-6 py-10 text-center"
 				style="border-color: var(--accent-grass); background: var(--bg-card)"
 			>
-				<p class="font-display text-2xl font-bold text-[var(--accent-grass)]">Message sent ✓</p>
+				<div class="flex flex-col items-center gap-3">
+					<CircleCheck size={40} class="text-[var(--accent-grass)]" strokeWidth={2} />
+					<p class="font-display text-2xl font-bold text-[var(--accent-grass)]">Message sent</p>
+				</div>
 				<p class="font-body mt-2 text-sm" style="color: var(--text-muted)">Thanks — I'll get back to you.</p>
 			</div>
 		{:else}

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { asset } from '$app/paths';
+	import { ChevronDown } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import { SITE } from '$lib/portfolio/config';
 	import { registerGsap, gsap } from '$lib/utils/gsap';
@@ -108,7 +110,7 @@
 		<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
 			<a
 				data-cta
-				href={SITE.resumePath}
+				href={asset(SITE.resumePath)}
 				class="rounded-full px-8 py-3 text-sm font-semibold transition-colors"
 				style="background: var(--accent-grass); color: var(--bg-deep)"
 				download
@@ -141,6 +143,6 @@
 		style="color: var(--text-muted)"
 	>
 		<span>Scroll</span>
-		<span class="text-lg" aria-hidden="true">↓</span>
+		<ChevronDown size={20} class="text-[var(--accent-grass)]" />
 	</div>
 </section>

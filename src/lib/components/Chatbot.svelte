@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Loader2, MessageCircle, X } from '@lucide/svelte';
 	import { SITE } from '$lib/portfolio/config';
 
 	let open = $state(false);
@@ -100,12 +101,12 @@
 				<p class="font-heading text-sm" style="color: var(--text-primary)">Ask {SITE.name.split(' ')[0]}</p>
 				<button
 					type="button"
-					class="text-lg leading-none"
+					class="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-[color-mix(in_srgb,var(--bg-card)_80%,transparent)]"
 					style="color: var(--text-muted)"
 					onclick={() => (open = false)}
 					aria-label="Close chat"
 				>
-					×
+					<X size={18} />
 				</button>
 			</div>
 			<div class="flex flex-1 flex-col gap-2 overflow-y-auto p-4">
@@ -122,10 +123,9 @@
 					</div>
 				{/each}
 				{#if typing && messages[messages.length - 1]?.role === 'assistant' && !messages[messages.length - 1]?.text}
-					<div class="font-body flex gap-1 text-xs" style="color: var(--text-muted)">
-						<span class="animate-bounce">●</span>
-						<span class="animate-bounce" style="animation-delay: 0.1s">●</span>
-						<span class="animate-bounce" style="animation-delay: 0.2s">●</span>
+					<div class="font-body flex items-center gap-2 text-xs" style="color: var(--text-muted)">
+						<Loader2 size={16} class="animate-spin" />
+						<span>Thinking…</span>
 					</div>
 				{/if}
 			</div>
@@ -169,13 +169,13 @@
 	{/if}
 	<button
 		type="button"
-		class="pointer-events-auto relative flex h-14 w-14 items-center justify-center rounded-full border-2 text-2xl shadow-lg"
-		style="border-color: var(--accent-grass); background: var(--bg-elevated)"
+		class="pointer-events-auto relative flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-lg"
+		style="border-color: var(--accent-grass); background: var(--bg-elevated); color: var(--text-primary)"
 		onclick={() => (open = !open)}
 		aria-expanded={open}
 		aria-label="Open chat"
 	>
-		💬
+		<MessageCircle size={24} strokeWidth={2} />
 		<span
 			class="absolute inset-0 rounded-full border-2 border-[var(--accent-honey)] opacity-40 animate-ping pointer-events-none"
 			aria-hidden="true"

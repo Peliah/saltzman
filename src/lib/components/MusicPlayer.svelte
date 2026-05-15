@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Disc3, Pause, Play, SkipBack, SkipForward } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 	import { Howl, Howler } from 'howler';
 	import { music, TRACKS, initMusicFromStorage, persistMusicPrefs } from '$lib/stores/music.svelte';
@@ -118,7 +119,7 @@
 						? 'animation: spin 8s linear infinite'
 						: ''}"
 				>
-					<span class="text-lg">💿</span>
+					<Disc3 size={26} class="text-[var(--accent-grass)]" strokeWidth={1.75} />
 				</div>
 				<div class="min-w-0 flex-1">
 					<p class="font-heading truncate text-sm" style="color: var(--text-primary)">
@@ -144,16 +145,22 @@
 					disabled={TRACKS.length === 0}
 					aria-label="Previous track"
 				>
-					◀
+					<SkipBack size={18} />
 				</button>
 				<button
 					type="button"
-					class="rounded-full px-4 py-2 text-sm font-semibold disabled:opacity-40"
+					class="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold disabled:opacity-40"
 					style="background: var(--accent-grass); color: var(--bg-deep)"
 					onclick={togglePlay}
 					disabled={TRACKS.length === 0}
 				>
-					{music.playing ? 'Pause' : 'Play'}
+					{#if music.playing}
+						<Pause size={16} fill="currentColor" />
+						Pause
+					{:else}
+						<Play size={16} fill="currentColor" />
+						Play
+					{/if}
 				</button>
 				<button
 					type="button"
@@ -163,7 +170,7 @@
 					disabled={TRACKS.length === 0}
 					aria-label="Next track"
 				>
-					▶
+					<SkipForward size={18} />
 				</button>
 			</div>
 			<label class="font-body mt-3 flex items-center gap-2 text-xs" style="color: var(--text-muted)">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Moon, Sun } from '@lucide/svelte';
 	import { theme, toggleTheme, applyThemeClass } from '$lib/stores/theme.svelte';
 
 	function onToggle() {
@@ -15,8 +16,8 @@
 	aria-label={theme.mode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
 >
 	{#if theme.mode === 'dark'}
-		<span class="text-lg" aria-hidden="true">☀️</span>
+		<Sun size={20} strokeWidth={2} />
 	{:else}
-		<span class="text-lg" aria-hidden="true">🌙</span>
+		<Moon size={20} strokeWidth={2} />
 	{/if}
 </button>

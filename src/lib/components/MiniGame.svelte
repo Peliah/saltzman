@@ -28,6 +28,37 @@
 
 	type Bug = { x: number; y: number; vy: number };
 
+	function drawBug(ctx: CanvasRenderingContext2D, x: number, y: number, fill: string, eye: string) {
+		ctx.save();
+		ctx.translate(x, y);
+		ctx.fillStyle = fill;
+		ctx.beginPath();
+		ctx.ellipse(0, 0, 11, 9, 0, 0, Math.PI * 2);
+		ctx.fill();
+		ctx.strokeStyle = fill;
+		ctx.lineWidth = 1.5;
+		ctx.lineCap = 'round';
+		for (const [lx, ly] of [
+			[-12, -5],
+			[-12, 5],
+			[12, -5],
+			[12, 5],
+			[-7, 9],
+			[7, 9]
+		]) {
+			ctx.beginPath();
+			ctx.moveTo(lx * 0.35, ly * 0.35);
+			ctx.lineTo(lx, ly);
+			ctx.stroke();
+		}
+		ctx.fillStyle = eye;
+		ctx.beginPath();
+		ctx.arc(-4, -2, 2.2, 0, Math.PI * 2);
+		ctx.arc(4, -2, 2.2, 0, Math.PI * 2);
+		ctx.fill();
+		ctx.restore();
+	}
+
 	const gameCanvas: Action<HTMLCanvasElement> = (canvas) => {
 		st.score = 0;
 		st.misses = 0;
@@ -90,9 +121,13 @@
 			}
 			bugs = alive;
 
+			const grass =
+				getComputedStyle(document.documentElement).getPropertyValue('--accent-grass').trim() ||
+				'#6cbf6a';
+			const eye =
+				getComputedStyle(document.documentElement).getPropertyValue('--bg-deep').trim() || '#0c100d';
 			for (const b of bugs) {
-				ctx.font = '22px serif';
-				ctx.fillText('🐛', b.x, b.y);
+				drawBug(ctx, b.x, b.y, grass, eye);
 			}
 
 			const muted =
