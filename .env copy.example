@@ -1,0 +1,12 @@
+# Copy to `.env` / Vercel. Leave empty only if you skip Convex locally (guest book disabled)
+
+# Optional OpenRouter attribution
+OPENROUTER_HTTP_REFERER=
+OPENROUTER_APP_NAME=Portfolio
+
+# EmailJS (public keys — safe in client)
+PUBLIC_EMAILJS_SERVICE_ID=
+PUBLIC_EMAILJS_TEMPLATE_ID=
+PUBLIC_EMAILJS_PUBLIC_KEY=
+
+

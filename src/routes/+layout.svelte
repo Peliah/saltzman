@@ -1,56 +1,34 @@
 <script lang="ts">
-	import Header from './Header.svelte';
 	import './layout.css';
+	import type { Snippet } from 'svelte';
+	import { onMount } from 'svelte';
+	import ConvexInit from '$lib/components/ConvexInit.svelte';
+	import ScrollProgress from '$lib/components/ScrollProgress.svelte';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import Cursor from '$lib/components/Cursor.svelte';
+	import MusicPlayer from '$lib/components/MusicPlayer.svelte';
+	import Chatbot from '$lib/components/Chatbot.svelte';
+	import { initThemeFromStorage, applyThemeClass } from '$lib/stores/theme.svelte';
 
-	let { children } = $props();
+	let { data, children }: { data: { convexUrl: string; hasConvex: boolean }; children: Snippet } = $props();
+
+	onMount(() => {
+		initThemeFromStorage();
+		applyThemeClass();
+	});
 </script>
 
-<div class="app">
-	<Header />
-	<main>{@render children()}</main>
-
-	<footer>
-		<p>
-			visit
-			<a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a>
-			to learn about SvelteKit
-		</p>
-	</footer>
+<div class="relative z-10 min-h-svh overflow-x-hidden">
+	<ScrollProgress />
+	<Cursor />
+	<ThemeToggle />
+	<MusicPlayer />
+	<Chatbot />
+	{#if data.hasConvex}
+		<ConvexInit url={data.convexUrl}>
+			{@render children()}
+		</ConvexInit>
+	{:else}
+		{@render children()}
+	{/if}
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
