@@ -27,7 +27,7 @@
 
 	$effect(() => {
 		if (!browser) return;
-		filter;
+		void filter;
 		const cards = document.querySelectorAll('[data-project-card]');
 		if (cards.length === 0) return;
 		registerGsap();
@@ -108,7 +108,7 @@
 		</p>
 
 		<div class="mb-10 flex flex-wrap gap-3" role="tablist" aria-label="Project categories">
-			{#each categories as c}
+			{#each categories as c (c)}
 				<button
 					type="button"
 					class="rounded-full border px-5 py-2.5 text-sm font-semibold transition-all active:scale-95"
@@ -202,7 +202,7 @@
 			</h2>
 			<p class="font-body mt-4 leading-relaxed" style="color: var(--text-muted)">{modal.description}</p>
 			<div class="mt-4 flex flex-wrap gap-2">
-				{#each modal.stack as t}
+				{#each modal.stack as t, i (`${modal.slug}-${i}`)}
 					<span
 						class="rounded-full px-3 py-1 text-xs font-medium"
 						style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-subtle)"
@@ -218,7 +218,7 @@
 						class="rounded-full px-6 py-2.5 text-sm font-bold transition hover:brightness-110"
 						style="background: linear-gradient(135deg, var(--accent-grass), var(--accent-grass-dim)); color: var(--bg-deep)"
 						target="_blank"
-						rel="noreferrer"
+						rel="noopener noreferrer external"
 					>
 						Live site
 					</a>
@@ -229,7 +229,7 @@
 						class="rounded-full border px-6 py-2.5 text-sm font-semibold transition hover:border-[var(--accent-grass)]"
 						style="border-color: var(--border-subtle); color: var(--text-primary)"
 						target="_blank"
-						rel="noreferrer"
+						rel="noopener noreferrer external"
 					>
 						Source
 					</a>
