@@ -8,8 +8,8 @@
 
 	let filter: ProjectCategory = $state('all');
 	let modal: Project | null = $state(null);
-	let backdropEl: HTMLButtonElement | undefined;
-	let panelEl: HTMLDivElement | undefined;
+	let backdropEl = $state<HTMLButtonElement | undefined>(undefined);
+	let panelEl = $state<HTMLDivElement | undefined>(undefined);
 
 	const categories: ProjectCategory[] = ['all', 'frontend', 'backend', 'fullstack'];
 

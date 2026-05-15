@@ -5,6 +5,7 @@
 	import { SITE } from '$lib/portfolio/config';
 	import { registerGsap, gsap } from '$lib/utils/gsap';
 	import { music } from '$lib/stores/music.svelte';
+	import { setPortfolioView } from '$lib/stores/portfolio-view.svelte';
 
 	let canvas: HTMLCanvasElement;
 	let hero: HTMLElement;
@@ -74,8 +75,8 @@
 		};
 	});
 
-	function scrollToProjects() {
-		document.getElementById('projects')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+	function goToProjects() {
+		setPortfolioView('projects');
 	}
 </script>
 
@@ -122,7 +123,7 @@
 				type="button"
 				class="rounded-full border-2 px-8 py-3 text-sm font-semibold transition-colors"
 				style="border-color: var(--accent-grass); color: var(--text-primary)"
-				onclick={scrollToProjects}
+				onclick={goToProjects}
 			>
 				View projects
 			</button>
@@ -142,7 +143,7 @@
 		class="font-body absolute bottom-8 flex flex-col items-center gap-2 text-xs"
 		style="color: var(--text-muted)"
 	>
-		<span>Scroll</span>
+		<span>Pick a section</span>
 		<ChevronDown size={20} class="text-[var(--accent-grass)]" />
 	</div>
 </section>

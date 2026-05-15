@@ -3,18 +3,44 @@
 
 	let pct = $state(0);
 
+	const MAIN_SCROLL_ID = 'portfolio-scroll-main';
+
 	onMount(() => {
 		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduce) return;
+
+		let scrollEl: HTMLElement | null = null;
+		let raf = 0;
+
 		const onScroll = () => {
-			const doc = document.documentElement;
-			const max = doc.scrollHeight - doc.clientHeight;
-			pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+			const el = scrollEl;
+			if (el) {
+				const max = el.scrollHeight - el.clientHeight;
+				pct = max > 0 ? (el.scrollTop / max) * 100 : 0;
+			} else {
+				const doc = document.documentElement;
+				const max = doc.scrollHeight - doc.clientHeight;
+				pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+			}
 		};
-		if (!reduce) {
-			window.addEventListener('scroll', onScroll, { passive: true });
+
+		const bind = () => {
+			cancelAnimationFrame(raf);
+			scrollEl = document.getElementById(MAIN_SCROLL_ID);
+			if (!scrollEl) {
+				raf = requestAnimationFrame(bind);
+				return;
+			}
+			scrollEl.addEventListener('scroll', onScroll, { passive: true });
 			onScroll();
-			return () => window.removeEventListener('scroll', onScroll);
-		}
+		};
+
+		bind();
+
+		return () => {
+			cancelAnimationFrame(raf);
+			scrollEl?.removeEventListener('scroll', onScroll);
+		};
 	});
 </script>
 
